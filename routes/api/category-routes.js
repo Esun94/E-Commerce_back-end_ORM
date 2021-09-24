@@ -14,16 +14,10 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Products
 });
 
-router.get('/:id', (req, res) => {
-  Category.findOne(
-    {
-      where: {
-        id: req.params.id
-      },
-    }
-  ).then((bookData) => {
-    res.json(bookData);
-  });
+router.get('/:id', async (req, res) => {
+  const categoryData = await Category.findByPk(req.params.id)
+
+  return res.json(categoryData)
   // find one category by its `id` value
   // be sure to include its associated Products
 });
